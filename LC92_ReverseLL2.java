@@ -9,10 +9,60 @@ package leetcode_study;
  * pointers for previous, current, stride, remaining.      
  * 
  * Output: 1->4->3->2->5->NULL
+ * 
+ * 
+ * [Approach 1-2] better version using pointers.
+ *  marks are required to the point *one node before* the connection.
+ *  bc/ notes have the next pointer only.
+ *  
+ * 1 -> 2 -> 3 -> 4 -> 5   ||   1 -> 4 -> 3 -> 2 -> 5
+ *                              ^              ^   
+ *                           (start)         (tail)
+ *                           
+ * 1. mark start and tail pointer.
+ * 2. reverse in-between
+ * 3. connect 2 points : start.next, tail.next
+ * 
+ * 
  * @author Sunny Park
  *
  */
 public class LC92_ReverseLL2 {
+    public static Node reverseLL_pointers2(Node head, int m, int n) {
+        Node prev = null;
+        Node curr = head;
+        
+        while (m > 1) {
+            prev = curr;
+            curr = curr.next;
+            m--;
+            n--;
+        }
+        
+        Node start = prev;
+        Node tail = curr;
+        prev = null;
+        
+        Node tmp = null;
+        while (n > 0) {
+            tmp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = tmp;
+            n--;
+        }
+        
+        if (start != null) {
+            start.next = prev;
+        } else {
+            head = prev;
+        }
+        
+        tail.next = curr;
+        return head;
+    }
+    
+
     public static Node reverseLL_pointers(Node head, int m, int n) {
         Node prev = head;
         int cnt = 0;
@@ -79,7 +129,7 @@ public class LC92_ReverseLL2 {
         n3.next = n4;
         n4.next = n5;
         
-        reverseLL_pointers(n1, 2, 4);
+        reverseLL_pointers2(n1, 2, 4);
         System.out.println(n1);
     }
 }
