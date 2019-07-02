@@ -4,7 +4,7 @@ package leetcode_study;
  * Q. Given a linked list, swap every two adjacent nodes and return its head.
  * Given 1->2->3->4, you should return the list as 2->1->4->3.
  * 
- * [Intuition]
+ * [Approach]
  * 
  * 1. pointer
  * By proceeding with prev, curr pointer each time, 
