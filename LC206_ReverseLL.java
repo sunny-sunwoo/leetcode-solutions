@@ -20,7 +20,7 @@ package leetcode_study;
  * @author Sunny Park
  *
  */
-public class LC206ReverseLL{
+public class LC206_ReverseLL{
     
     public static Node reverseRecursive(Node head) {
         if (head.next == null) {
