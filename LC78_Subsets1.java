@@ -24,6 +24,9 @@ import java.util.List;
  * base case: when ptr exceeds the right bound!
  * logic: 2 choices for each time - include / exclude
  * 
+ * T.C: O(2^n * n)
+ * S.C: O(n) depth
+ * 
  * @author Sunny Park
  *
  */
