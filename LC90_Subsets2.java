@@ -21,9 +21,10 @@ import java.util.List;
  * ]
  * 
  * [Approach1] Backtracking with global variable. 
- *  checking what's removed. 
+ *  checking what's just removed. 
  * 
  * [Approach2] Better bactracking. 
+ *   -> recurse on the valid list only!
  *  checking if the previous elem equals to the curr. 
  *  no need to consider remove opr. 
  *  nums should be sorted first!
@@ -54,7 +55,7 @@ public class LC90_Subsets2 {
     private static void backtrack2(List<List<Integer>> result, List<Integer> tmp, int[] nums, int ptr) {
         result.add(tmp);
         for (int i = ptr; i < nums.length; i++) {
-            if (i > ptr && nums[i - 1] == nums [i]) continue;
+            if (i > ptr && nums[i - 1] == nums[i]) continue;
             List<Integer> path = new ArrayList<>(tmp);
             path.add(nums[i]);
             backtrack2(result, path, nums, i + 1);
