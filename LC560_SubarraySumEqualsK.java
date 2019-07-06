@@ -33,7 +33,7 @@ import java.util.Map;
  */
 
 public class LC560_SubarraySumEqualsK {
-    public static int subarray(int[] nums, int k) {
+    public static int findSubarrayNum(int[] nums, int k) {
         Map<Integer/* sum */, Integer /* cnt */> cache = new HashMap<>();
         cache.put(0, 1);
         int sum = 0, result = 0;
@@ -45,5 +45,10 @@ public class LC560_SubarraySumEqualsK {
             cache.put(sum, cache.getOrDefault(sum, 0) + 1);
         }
         return result;
+    }
+    
+    public static void main(String[] args) {
+        int[] nums = {3, 4, 7, 2, -3, 1, 4, 2};
+        System.out.println(findSubarrayNum(nums, 7));
     }
 }
