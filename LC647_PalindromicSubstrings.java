@@ -1,7 +1,6 @@
 package leetcode_study;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -32,15 +31,16 @@ import java.util.List;
  * [Approach3] DP
  * @see <a href="https://leetcode.com/problems/palindromic-substrings/discuss/258917/Java-Simple-Code%3A-DP-short"></a>
  *    0  1  2  3  4
-     i\j | a  b  b  a  c  
+     i\j | a  b  b  a   c  
     --------------------
-     0 a | T  F  F  T  F
-     1 b | F  T  T  F  F 
-     2 b | F  F  T  F  F
-     3 a | F  F  F  T  F
-     4 c | F  F  F  F  T
+     0 a | T  *F  F  T  F
+     1 b | F  T  *T  F  F 
+     2 b | F  F   T *F  F
+     3 a | F  F   F  T *F
+     4 c | F  F   F  F  T
      
      i = starting index, j = last index
+     * when d = 1
      
  * 1) i > j: always false
  * 2) i == j: always true
@@ -64,14 +64,35 @@ public class LC647_PalindromicSubstrings {
      */
     public static int countSubstring_bruteforce(String s) {
         List<String> list = new ArrayList<>();
-        generateAll(list, "", s, 0);
+        generateAll(list, s, 0);
         int count = 0;
         for (String sub : list) {
             if (isPalindrome(sub)) {
                 count++;
             }
         }
+        System.out.println(list);
         return count;
+    }
+    
+    private static void generateAll(List<String> result, String s, int ptr) {
+        if (ptr >= s.length()) {
+            return;
+        }
+        moveSecondPtr(result, s, ptr, ptr + 1);
+        generateAll(result, s, ptr + 1);
+    }
+    
+    private static void moveSecondPtr(List<String> result, String s, int i, int j) {
+        if (j > s.length()) {
+            return;
+        }
+        result.add(s.substring(i, j));
+        moveSecondPtr(result, s, i, j + 1);
+    }
+    
+    private static boolean isPalindrome(String s) {
+        return new StringBuilder(s).reverse().toString().equals(s);
     }
     
     /**
@@ -88,6 +109,16 @@ public class LC647_PalindromicSubstrings {
         return count;
     }
     
+    private static int expand(String s, int i, int j) {
+        int count = 0;
+        while (i >= 0 && j < s.length() && s.charAt(i) == s.charAt(j)) {
+            count++;
+            i--;
+            j++;
+        }
+        return count;
+    }
+    
     /**
      * Approach3. DP
      * @param s
@@ -99,7 +130,7 @@ public class LC647_PalindromicSubstrings {
         int count = 0;
         
         for (int d = 0; d < len; d++) {  // diagonal count
-            for (int i = 0; i + d < len; i++) { // row count
+            for (int i = 0; i + d < len; i++) { // row count, while j < len.
                 int j = i + d; // col
                 if (s.charAt(i) == s.charAt(j)) {
                     dp[i][j] = (j - i <= 2) ? true : dp[i + 1][j - 1];
@@ -109,9 +140,12 @@ public class LC647_PalindromicSubstrings {
         }
         return count;
     }
-    
 
     public static void main(String[] args) {
+        String s = "aaaaaaa";
+        System.out.println(countSubstring_bruteforce(s));
+        System.out.println(countSubstring_recursive(s));
+        System.out.println(countSubstring_dp(s));
     }
     
 }
