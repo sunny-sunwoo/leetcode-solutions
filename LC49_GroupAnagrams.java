@@ -92,17 +92,21 @@ public class LC49_GroupAnagrams {
      * @return
      */
     public static List<List<String>> groupAnagram_map(String[] input) {
-//        Map<String, List<String>> cache = new LinkedHashMap<>(); // will keep the relative order.
-        Map<String, List<String>> cache = new HashMap<>();
+        Map<String, List<String>> cache = new LinkedHashMap<>(); // will keep the relative order.
+//        Map<String, List<String>> cache = new HashMap<>(); // will ignore the order.
         for (String word : input) {
-            char[] curr = word.toCharArray();
-            Arrays.sort(curr);
-            String key = String.valueOf(curr);
+            String key = toSortedKey(word);
             List<String> currList = cache.getOrDefault(key, new ArrayList<String>());
             currList.add(word);
             cache.put(key, currList);
         }
         return new ArrayList<>(cache.values());
+    }
+    
+    private static String toSortedKey(String word) {
+        char[] curr = word.toCharArray();
+        Arrays.sort(curr);
+        return String.valueOf(curr);
     }
     
     public static void main(String[] args) {
