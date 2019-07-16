@@ -14,8 +14,11 @@ import java.util.Map;
  * Output: [1,2]
  * 
  * [Approach1] NLogN time using minHeap.
+ * => O(NLogK) time, O(N) space.
  * 
  * [Approach2] N time with multiple interation.
+ * - solution is interesting, 
+ * but won't work if elem can include negative nums or have same freq numbers.
  * 1. build a freq map.
  * 2. build an array and fill -1 at first.
  *    index(value - 1) = elem (key)
@@ -60,7 +63,7 @@ public class LC347_TopKFreqElement {
     }
     
     public static void main(String[] args) {
-        int[] arr = {1,1,1,2,2,3,3,3,3,3,3,4,4,4};
-        System.out.println(topKElement(arr, 2));
+        int[] arr = {1,1,1,2,2,3,3,3,3,3,3,4,4,4,4};
+        System.out.println(topKElement(arr, 3));
     }
 }
