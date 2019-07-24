@@ -69,6 +69,7 @@ public class LC207_CourseSchedule {
                     visited.add(next);
                 }
             }
+            adjList.get(curr).clear();
         }
         
         return visited.size() == numCourses;

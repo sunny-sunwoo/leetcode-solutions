@@ -15,7 +15,6 @@ import java.util.List;
       [1,2,1],
       [2,1,1]
     ]
- 
 
  * [Approach] Backtracking.
  *     think about the search tree when applying Backtracking.
