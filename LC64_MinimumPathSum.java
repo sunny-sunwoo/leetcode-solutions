@@ -13,7 +13,16 @@ package leetcode_study;
    ]
  * Output: 7
  * Explanation: Because the path 1→3→1→1→1 minimizes the sum.
- * @author JungwooP
+ * 
+ * [Approach] dp
+ * to point(i, j) <- from up OR from left.
+ * by keeping min of up or left, and adding up self, 
+ * result can be found at the last cell.
+ * 
+ * [Note]
+ * check the bound! and assign MAX_VALUE to ignore invalid pos.
+ * 
+ * @author Sunny Park
  *
  */
 public class LC64_MinimumPathSum {
