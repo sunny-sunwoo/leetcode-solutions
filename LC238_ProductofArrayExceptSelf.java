@@ -1,5 +1,7 @@
 package leetcode_study;
 
+import java.util.Arrays;
+
 /**
  * LC 238 Product of array except self
  * 
@@ -20,7 +22,7 @@ package leetcode_study;
  *
  */
 public class LC238_ProductofArrayExceptSelf {
-    public int[] productExceptSelf(int[] nums) {
+    public static int[] productExceptSelf(int[] nums) {
         int[] ans = new int[nums.length];
         ans[0] = 1;
         for (int i = 1; i < nums.length; i++) {
@@ -33,5 +35,10 @@ public class LC238_ProductofArrayExceptSelf {
             r = r * nums[i];
         }
         return ans;
+    }
+    
+    public static void main(String[] args) {
+        int[] nums = {4,5,1,8,2};
+        System.out.print(Arrays.toString(productExceptSelf(nums)));
     }
 }
