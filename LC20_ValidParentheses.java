@@ -55,7 +55,25 @@ public class LC20_ValidParentheses {
         return map;
     }
     
+    /**
+     * given a string which inclue (,) only.
+     * -> no need to use stack separately.
+     * @param s
+     * @return
+     */
+    public static boolean validate(String s) {
+        int leftCount = 0;
+        for(char c : s.toCharArray()) {
+            if (c == '(') leftCount++;
+            else {
+                if (leftCount <= 0) return false;
+                leftCount--;
+            }
+        }
+        return leftCount == 0;
+    }
     public static void main(String[] args) {
-        System.out.println(isValid("{[]}"));
+//        System.out.println(isValid("{[]}"));
+        System.out.println(validate(")()("));
     }
 }
