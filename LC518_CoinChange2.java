@@ -18,6 +18,15 @@ package leetcode_study;
  * Input: amount: 3, coins = [2]
  * Output: 0
  * 
+ * [Approach] dynamic programming
+ * 1. dp table (with 1 more row & col)
+ * 2. init first col with 1
+ * 3. if curr coin is enough to include curr amt? prev row + curr row (step back by coin size)
+ * 4. rt last cell.
+ * 
+ * => each cell
+ *    = number of cases to represent the amount using curr available coins.
+ *    
  * @author Sunny Park
  *
  */
