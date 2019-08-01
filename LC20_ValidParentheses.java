@@ -73,40 +73,45 @@ public class LC20_ValidParentheses {
         return leftCount == 0;
     }
     
+    /**
+     * Variation: ([{]()}) is true! it's true as long as it has open parentheses.
+     * @param input
+     * @return
+     */
     public static boolean validateParenetheses(String input) {
         int round = 0, curly = 0, square = 0;
         for (char c : input.toCharArray()) {
             if (c == '(') {
                 round++;
                 continue;
-    }
+            }
             if (c == '{') {
                 curly++;
                 continue;
-    }
-    if (c == '[') {
+            }
+            if (c == '[') {
                 square++;
                 continue;
-    }
+            }
 
-    if (c == ')') {
-        if (round < 1) return false;
-        round--;
-        continue;
-    }
+            if (c == ')') {
+                if (round < 1) return false;
+                round--;
+                continue;
+            }
 
-    if (c == '}') {
-        if (curly < 1) return false;
-        curly--;
-        continue;
-    }
-    if (c == ']') {
-        if (square < 1) return false;
-        square--;
-        continue;
-    }
-    }
-    return (round == 0) && (curly == 0) && (square == 0);
+            if (c == '}') {
+                if (curly < 1) return false;
+                curly--;
+                continue;
+            }
+            if (c == ']') {
+                if (square < 1) return false;
+                square--;
+                continue;
+            }
+        }
+        return (round == 0) && (curly == 0) && (square == 0);
     }
 
     public static void main(String[] args) {

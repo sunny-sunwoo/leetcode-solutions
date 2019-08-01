@@ -46,6 +46,7 @@ public class LC297_SerializeAndDeserializeBT {
     }
     
     public static TreeNode deserialize(String data) {
+        System.out.println(data);
         Queue<String> convData = new LinkedList<>();
         convData.addAll(Arrays.asList(data.split(",")));
         return parse(convData);
