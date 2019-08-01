@@ -63,7 +63,7 @@ public class LC47_Permutations2 {
         }
         
         for (int i = 0; i < nums.length; i++) {
-            if (used[i] || i > 0 && !used[i - 1] && nums[i - 1] == nums[i]) continue;
+            if (used[i] || i > 0 && !used[i - 1] && (nums[i - 1] == nums[i])) continue;
             tmp.add(nums[i]);
             used[i] = true;
             permute2(result, tmp, nums, used);

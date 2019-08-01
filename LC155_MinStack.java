@@ -31,12 +31,13 @@ public class LC155_MinStack {
        Node newNode = new Node(x);
        if (stack == null) {
            stack = newNode;
+           min = stack;
        } else {
            newNode.next = stack;
            stack = newNode;
        }
        
-       if (min == null || stack.val < min.val) {
+       if (stack.val < min.val) {
            stack.prevMin = min;
            min = stack;
        }
@@ -44,7 +45,7 @@ public class LC155_MinStack {
    
    public void pop() {
        Node toPop = stack;
-       if (toPop == min) {
+       if (toPop.prevMin != null) {
            min = toPop.prevMin;
        }
        stack = stack.next;
