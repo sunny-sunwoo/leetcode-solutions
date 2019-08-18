@@ -29,7 +29,7 @@ A solution set is:
  * @author Sunny Park
  *
  */
-public class LC15_3Sum {
+public class LC15_3Sum {    
     public static List<List<Integer>> threesum(int[] arr) {
         List<List<Integer>> result = new ArrayList<>();
         Arrays.sort(arr);
@@ -50,9 +50,9 @@ public class LC15_3Sum {
                 } 
                 
                 if (sum < target) {
-                    lo++;
+                    while (lo < hi) lo++;
                 } else {
-                    hi--;
+                    while (lo < hi) hi--;
                 }
             }
         }
