@@ -1,7 +1,9 @@
 package leetcode_study;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.primitives.Chars;
 
@@ -31,6 +33,13 @@ import com.google.common.primitives.Chars;
  * 
  * 
  * [Approach2] using HashMap<Character, Integer>
+ * 1. iterate through each char of s - populate hashmap
+ * 2. iterate through each char of t 
+ *    - check if hashmap contains key curr char -> if not, rt false.
+ *    - check if value is 1 -> remove entry and continue.
+ *    - update curr entry by decrementing freq by 1.
+ * 3. rt true
+ *    
  * 
  * @author Sunny Park
  *
@@ -51,7 +60,28 @@ public class LC242_ValidAnagram {
         chars.forEach(c -> checker[c.charValue() - 'a']++);
     }
     
+    public static boolean isValidAnagram_unicode(String s, String t) {
+        Map<Character, Integer> freqMap = new HashMap<>();
+        populateMap(freqMap, s);
+        for (char c : t.toCharArray()) {
+            if (!freqMap.containsKey(c)) return false;
+            int freq = freqMap.get(c).intValue();
+            if (freq == 1) {
+                freqMap.remove(c);
+                continue;
+            }
+            freqMap.put(c, freq - 1);
+        }
+        return freqMap.size() == 0;
+    }
+    
+    private static void populateMap(Map<Character, Integer> freqMap, String s) {
+        List<Character> chars = Chars.asList(s.toCharArray());
+        chars.forEach(e -> freqMap.put(e, freqMap.getOrDefault(e, 0) + 1));
+    }
+    
     public static void main(String[] args) {
         System.out.println(isValidAnagram("anagram", "nagaram"));
+        System.out.println(isValidAnagram_unicode("anagram", "nagaram"));
     }
 }
