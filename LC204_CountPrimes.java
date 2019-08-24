@@ -1,4 +1,7 @@
 package leetcode_study;
+
+import java.util.Arrays;
+
 /**
  * Count the number of prime numbers less than a non-negative number, n.
  * 
@@ -23,6 +26,27 @@ package leetcode_study;
  */
 public class LC204_CountPrimes {
     public static int countPrimes(int n) {
-        
+       boolean[] primeChecker = new boolean[n + 1];
+       for (int i = 2; i * i <= n; i++) {
+           if (primeChecker[i]) continue;
+           checkMultiples(primeChecker, i);
+       }
+       
+       int count = 0;
+       for (int i = 2; i <= n; i++) {
+           if (!primeChecker[i]) count++;
+       }
+       return count;
+    }
+    
+    private static void checkMultiples(boolean[] checker, int start) {
+        for (int i = 2; start * i < checker.length; i++) {
+            checker[start * i] = true;
+        }
+        // System.out.println(Arrays.toString(checker));
+    }
+    
+    public static void main(String[] args) {
+        System.out.println(countPrimes(10));
     }
 }
